@@ -12,16 +12,16 @@ sys.path.insert(0, PROJECT_ROOT)
 
 from fastapi import APIRouter
 
-from app.core.scoring import rank_stations
-from app.core.optimizer import schedule_charging
-from app.core.pricing import calculate_all_prices
+from backend.app.core.scoring import rank_stations
+from backend.app.core.optimizer import schedule_charging
+from backend.app.core.pricing import calculate_all_prices
 
 router = APIRouter()
 
 
 @router.post("/simulate/peak")
 def simulate_peak():
-    from app.api.stations import get_state
+    from backend.app.api.stations import get_state
 
     state = get_state()
     state.inject_peak_demand()
@@ -49,7 +49,7 @@ def simulate_peak():
 
 @router.post("/simulate/grid-constraint")
 def simulate_grid_constraint():
-    from app.api.stations import get_state
+    from backend.app.api.stations import get_state
 
     state = get_state()
     state.inject_grid_constraint()
@@ -76,7 +76,7 @@ def simulate_grid_constraint():
 
 @router.post("/simulate/optimize")
 def simulate_optimize():
-    from app.api.stations import get_state
+    from backend.app.api.stations import get_state
 
     state = get_state()
 
@@ -216,7 +216,7 @@ def simulate_optimize():
 
 @router.post("/simulate/reset")
 def simulate_reset():
-    from app.api.stations import get_state
+    from backend.app.api.stations import get_state
 
     state = get_state()
     state.reset()
@@ -230,7 +230,7 @@ def simulate_reset():
 
 @router.get("/simulation/state")
 def simulation_state():
-    from app.api.stations import get_state
+    from backend.app.api.stations import get_state
 
     state = get_state()
 
@@ -244,7 +244,7 @@ def simulation_state():
 
 @router.get("/metrics")
 def metrics():
-    from app.api.stations import get_state
+    from backend.app.api.stations import get_state
 
     state = get_state()
 

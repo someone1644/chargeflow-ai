@@ -14,7 +14,7 @@ sys.path.insert(0, PROJECT_ROOT)
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.api import stations, forecasting, allocation, scheduling, simulation
+from backend.app.api import stations, forecasting, allocation, scheduling, simulation
 
 app = FastAPI(
     title="ChargeFlow AI",

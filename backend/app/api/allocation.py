@@ -11,8 +11,8 @@ sys.path.insert(0, PROJECT_ROOT)
 from fastapi import APIRouter
 from pydantic import BaseModel
 
-from app.core.scoring import rank_stations
-from app.core.pricing import calculate_all_prices
+from backend.app.core.scoring import rank_stations
+from backend.app.core.pricing import calculate_all_prices
 
 router = APIRouter()
 
@@ -29,7 +29,7 @@ class AllocateRequest(BaseModel):
 
 @router.post("/allocate")
 def allocate(req: AllocateRequest):
-    from app.api.stations import get_state
+    from backend.app.api.stations import get_state
 
     state = get_state()
 

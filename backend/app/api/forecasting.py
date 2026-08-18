@@ -22,7 +22,7 @@ class ForecastRequest(BaseModel):
 
 @router.post("/forecast")
 def forecast(req: ForecastRequest):
-    from app.api.stations import get_state
+    from backend.app.api.stations import get_state
 
     state = get_state()
 

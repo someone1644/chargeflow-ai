@@ -11,7 +11,7 @@ sys.path.insert(0, PROJECT_ROOT)
 from fastapi import APIRouter, HTTPException
 
 from simulation.simulator import SimulationState
-from app.core.pricing import calculate_all_prices
+from backend.app.core.pricing import calculate_all_prices
 
 router = APIRouter()
 

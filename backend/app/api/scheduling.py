@@ -11,7 +11,7 @@ sys.path.insert(0, PROJECT_ROOT)
 from fastapi import APIRouter
 from pydantic import BaseModel
 
-from app.core.optimizer import schedule_charging
+from backend.app.core.optimizer import schedule_charging
 
 router = APIRouter()
 
@@ -26,7 +26,7 @@ class ScheduleRequest(BaseModel):
 
 @router.post("/schedule")
 def schedule(req: ScheduleRequest):
-    from app.api.stations import get_state
+    from backend.app.api.stations import get_state
 
     state = get_state()
 
