@@ -5,8 +5,8 @@ import Recommendation from '../components/Recommendation';
 
 export default function DriverPortal({ data }) {
   const [form, setForm] = useState({
-    latitude: '17.445',
-    longitude: '78.380',
+    latitude: '13.060',
+    longitude: '80.260',
     current_soc: '25',
     target_soc: '90',
     max_charge_rate_kw: '60',
@@ -115,9 +115,9 @@ export default function DriverPortal({ data }) {
           {/* Quick presets */}
           <div className="mt-4 flex gap-2 flex-wrap">
             <span className="text-xs text-gray-600">Quick presets:</span>
-            <button onClick={() => setForm(f => ({ ...f, latitude: '17.443', longitude: '78.377', current_soc: '15' }))} className="text-xs text-blue-400 hover:text-blue-300 bg-blue-500/10 px-2 py-1 rounded">Near HITEC City (Low SOC)</button>
-            <button onClick={() => setForm(f => ({ ...f, latitude: '17.449', longitude: '78.391', current_soc: '40' }))} className="text-xs text-blue-400 hover:text-blue-300 bg-blue-500/10 px-2 py-1 rounded">Near Madhapur</button>
-            <button onClick={() => setForm(f => ({ ...f, latitude: '17.432', longitude: '78.407', current_soc: '10' }))} className="text-xs text-blue-400 hover:text-blue-300 bg-blue-500/10 px-2 py-1 rounded">Near Jubilee Hills (Critical)</button>
+            <button onClick={() => setForm(f => ({ ...f, latitude: '13.083', longitude: '80.271', current_soc: '15' }))} className="text-xs text-blue-400 hover:text-blue-300 bg-blue-500/10 px-2 py-1 rounded">Near Central Chennai (Low SOC)</button>
+            <button onClick={() => setForm(f => ({ ...f, latitude: '13.007', longitude: '80.257', current_soc: '40' }))} className="text-xs text-blue-400 hover:text-blue-300 bg-blue-500/10 px-2 py-1 rounded">Near Adyar</button>
+            <button onClick={() => setForm(f => ({ ...f, latitude: '12.965', longitude: '80.246', current_soc: '10' }))} className="text-xs text-blue-400 hover:text-blue-300 bg-blue-500/10 px-2 py-1 rounded">Near OMR / Perungudi (Critical)</button>
           </div>
         </div>
 

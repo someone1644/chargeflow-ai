@@ -22,8 +22,8 @@ class AllocateRequest(BaseModel):
     current_soc: int = 25
     target_soc: int = 90
     max_charge_rate_kw: int = 60
-    latitude: float = 17.445
-    longitude: float = 78.380
+    latitude: float = 13.060
+    longitude: float = 80.260
     deadline: str | None = None
 
 

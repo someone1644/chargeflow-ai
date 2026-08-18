@@ -22,14 +22,14 @@ def ensure_dir():
 
 
 # ---------------------------------------------------------------------------
-# Stations — 5 stations in a realistic metro-area cluster (Hyderabad region)
+# Stations — 5 stations in a realistic metro-area cluster (Chennai region)
 # ---------------------------------------------------------------------------
 STATIONS = [
     {
         "station_id": "ST01",
-        "name": "HITEC City Hub",
-        "latitude": 17.4435,
-        "longitude": 78.3772,
+        "name": "Central Chennai",
+        "latitude": 13.0827,
+        "longitude": 80.2707,
         "total_chargers": 8,
         "available_chargers": 3,
         "max_power_kw": 480.0,
@@ -40,9 +40,9 @@ STATIONS = [
     },
     {
         "station_id": "ST02",
-        "name": "Gachibowli Plaza",
-        "latitude": 17.4401,
-        "longitude": 78.3489,
+        "name": "Anna Nagar",
+        "latitude": 13.0850,
+        "longitude": 80.2101,
         "total_chargers": 6,
         "available_chargers": 4,
         "max_power_kw": 360.0,
@@ -53,9 +53,9 @@ STATIONS = [
     },
     {
         "station_id": "ST03",
-        "name": "Kondapur Station",
-        "latitude": 17.4625,
-        "longitude": 78.3526,
+        "name": "T. Nagar",
+        "latitude": 13.0418,
+        "longitude": 80.2341,
         "total_chargers": 5,
         "available_chargers": 2,
         "max_power_kw": 300.0,
@@ -66,9 +66,9 @@ STATIONS = [
     },
     {
         "station_id": "ST04",
-        "name": "Madhapur Charge Point",
-        "latitude": 17.4486,
-        "longitude": 78.3908,
+        "name": "Adyar",
+        "latitude": 13.0067,
+        "longitude": 80.2570,
         "total_chargers": 10,
         "available_chargers": 7,
         "max_power_kw": 600.0,
@@ -79,9 +79,9 @@ STATIONS = [
     },
     {
         "station_id": "ST05",
-        "name": "Jubilee Hills Depot",
-        "latitude": 17.4325,
-        "longitude": 78.4071,
+        "name": "OMR / Perungudi",
+        "latitude": 12.9650,
+        "longitude": 80.2460,
         "total_chargers": 7,
         "available_chargers": 5,
         "max_power_kw": 420.0,
@@ -197,9 +197,9 @@ def write_ev_requests():
         arrival = base_time + timedelta(minutes=random.randint(0, 180))
         # Deadline = arrival + 30-120 min
         deadline = arrival + timedelta(minutes=random.randint(30, 120))
-        # Random location near the station cluster
-        lat = 17.44 + random.uniform(-0.03, 0.03)
-        lon = 78.37 + random.uniform(-0.04, 0.04)
+        # Random location near the station cluster (Chennai region)
+        lat = 13.05 + random.uniform(-0.06, 0.06)
+        lon = 80.25 + random.uniform(-0.04, 0.04)
         requests.append({
             "ev_id": f"EV{i:03d}",
             "current_soc": soc,

@@ -36,7 +36,7 @@ def simulate_peak():
     prices = calculate_all_prices(state.stations, state.predictions)
 
     return {
-        "message": "Peak demand injected. 12 EVs burst near HITEC City Hub (ST01).",
+        "message": "Peak demand injected. 12 EVs burst near Central Chennai (ST01).",
         "scenario": state.scenario,
         "pending_evs": len(state.pending_evs),
         "congestion_alerts": state.congestion_alerts,
@@ -122,23 +122,34 @@ def simulate_optimize():
     # Step 2: Schedule charging with PuLP
     schedule_result = schedule_charging(state.pending_evs, state.stations, allocations)
 
-    # Step 3: Update actual station state based on optimised allocation
-    for s in state.stations:
-        assigned_evs = [a for a in allocations if a["station_id"] == s["station_id"]]
-        total_power = sum(
-            min(
-                next((e["max_charge_rate_kw"] for e in state.pending_evs if e["ev_id"] == a["ev_id"]), 60),
-                (s["grid_limit_kw"] - s["current_load_kw"]) / max(len(assigned_evs), 1)
-            )
-            for a in assigned_evs
-        )
-        # Respect grid limit
-        total_power = min(total_power, s["grid_limit_kw"] - s["current_load_kw"])
-        total_power = max(0, total_power)
+    # Step 3: Validate solver status and apply PuLP-scheduled power values
+    feasibility_issues = schedule_result.get("feasibility_issues", [])
+    pulp_schedules = schedule_result.get("schedules", [])
 
-        s["current_load_kw"] = round(s["current_load_kw"] + total_power, 1)
-        s["queue_length"] += len(assigned_evs)
-        s["available_chargers"] = max(0, s["available_chargers"] - len(assigned_evs))
+    # Aggregate PuLP results by station, distinguishing active vs deferred
+    station_active_power = {}   # station_id -> total kW from active EVs
+    station_active_count = {}   # station_id -> number of actively charging EVs
+    station_deferred_count = {} # station_id -> number of deferred/waiting EVs
+
+    for sched in pulp_schedules:
+        sid = sched["station_id"]
+        if sched.get("is_active", False):
+            station_active_power[sid] = station_active_power.get(sid, 0) + sched["charging_power_kw"]
+            station_active_count[sid] = station_active_count.get(sid, 0) + 1
+        else:
+            station_deferred_count[sid] = station_deferred_count.get(sid, 0) + 1
+
+    for s in state.stations:
+        sid = s["station_id"]
+        active_power = station_active_power.get(sid, 0)
+        active_count = station_active_count.get(sid, 0)
+        deferred_count = station_deferred_count.get(sid, 0)
+
+        # Apply PuLP-scheduled power directly (already grid-constrained by solver)
+        s["current_load_kw"] = round(s["current_load_kw"] + active_power, 1)
+        # Only deferred EVs join the queue; active EVs occupy chargers
+        s["queue_length"] += deferred_count
+        s["available_chargers"] = max(0, s["available_chargers"] - active_count)
 
     # Step 4: Calculate optimised metrics
     total_wait = 0
@@ -172,6 +183,9 @@ def simulate_optimize():
             "total_cost_rs": schedule_result.get("total_cost_rs", 0),
         },
     }
+
+    if feasibility_issues:
+        optimised_metrics["feasibility_issues"] = feasibility_issues
 
     state.optimised_metrics = optimised_metrics
     state.allocated_evs = allocations

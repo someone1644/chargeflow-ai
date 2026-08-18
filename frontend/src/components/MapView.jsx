@@ -7,7 +7,7 @@ const STATUS_COLORS = {
   red: '#ef4444',
 };
 
-const CENTER = [17.448, 78.380];
+const CENTER = [13.05, 80.25];
 
 export default function MapView({ stations }) {
   if (!stations?.length) return null;
@@ -24,7 +24,7 @@ export default function MapView({ stations }) {
         </div>
       </div>
       <div style={{ height: '420px' }}>
-        <MapContainer center={CENTER} zoom={13} style={{ height: '100%', width: '100%' }} zoomControl={false}>
+        <MapContainer center={CENTER} zoom={12} style={{ height: '100%', width: '100%' }} zoomControl={false}>
           <TileLayer
             attribution='&copy; OpenStreetMap'
             url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"

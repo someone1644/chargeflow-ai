@@ -59,21 +59,31 @@ def run_full_benchmark():
 
     schedule_res = schedule_charging(state.pending_evs, state.stations, allocations)
 
-    # Update state stations
+    # Update state stations using PuLP-scheduled power (active vs deferred)
+    pulp_schedules = schedule_res.get("schedules", [])
+    station_active_power = {}
+    station_active_count = {}
+    station_deferred_count = {}
+
+    for sched in pulp_schedules:
+        sid = sched["station_id"]
+        if sched.get("is_active", False):
+            station_active_power[sid] = station_active_power.get(sid, 0) + sched["charging_power_kw"]
+            station_active_count[sid] = station_active_count.get(sid, 0) + 1
+        else:
+            station_deferred_count[sid] = station_deferred_count.get(sid, 0) + 1
+
     for s in state.stations:
-        assigned_evs = [a for a in allocations if a["station_id"] == s["station_id"]]
-        total_power = sum(
-            min(
-                next((e["max_charge_rate_kw"] for e in state.pending_evs if e["ev_id"] == a["ev_id"]), 60),
-                (s["grid_limit_kw"] - s["current_load_kw"]) / max(len(assigned_evs), 1)
-            )
-            for a in assigned_evs
-        )
-        total_power = min(total_power, s["grid_limit_kw"] - s["current_load_kw"])
-        total_power = max(0, total_power)
-        s["current_load_kw"] = round(s["current_load_kw"] + total_power, 1)
-        s["queue_length"] += len(assigned_evs)
-        s["available_chargers"] = max(0, s["available_chargers"] - len(assigned_evs))
+        sid = s["station_id"]
+        active_power = station_active_power.get(sid, 0)
+        active_count = station_active_count.get(sid, 0)
+        deferred_count = station_deferred_count.get(sid, 0)
+
+        # Apply PuLP-scheduled power directly (already grid-constrained by solver)
+        s["current_load_kw"] = round(s["current_load_kw"] + active_power, 1)
+        # Only deferred EVs join the queue; active EVs occupy chargers
+        s["queue_length"] += deferred_count
+        s["available_chargers"] = max(0, s["available_chargers"] - active_count)
 
     total_wait = 0
     total_queue = 0

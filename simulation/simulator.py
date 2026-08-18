@@ -129,9 +129,9 @@ class SimulationState:
             rate = random.choice([50, 60, 120, 150])
             arrival = base_time + timedelta(minutes=random.randint(0, 30))
             deadline = arrival + timedelta(minutes=random.randint(40, 90))
-            # Cluster near ST01 (HITEC City)
-            lat = 17.4435 + random.uniform(-0.008, 0.008)
-            lon = 78.3772 + random.uniform(-0.008, 0.008)
+            # Cluster near ST01 (Central Chennai)
+            lat = 13.0827 + random.uniform(-0.008, 0.008)
+            lon = 80.2707 + random.uniform(-0.008, 0.008)
             burst_evs.append({
                 "ev_id": f"BURST{i + 1:03d}",
                 "current_soc": soc,

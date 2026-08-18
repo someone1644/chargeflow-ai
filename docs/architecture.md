@@ -51,7 +51,7 @@ sequenceDiagram
 
     Judge->>Dashboard: Click [Simulate Peak Demand]
     Dashboard->>API: POST /api/simulate/peak
-    API->>Sim: Inject 12 EVs at HITEC City Hub (ST01)
+    API->>Sim: Inject 12 EVs at Central Chennai (ST01)
     Sim->>ML: Predict future congestion risk (15-120 min)
     ML-->>Sim: Congestion risk = 95%
     Sim-->>API: High queue (8+ EVs), wait = 84 min, price = ₹23.5/kWh

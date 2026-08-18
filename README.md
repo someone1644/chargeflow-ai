@@ -119,7 +119,7 @@ chargeflow-ai/
 ├── requirements.txt                    # Python dependencies
 │
 ├── data/
-│   ├── stations.csv                    # 5 Hyderabad regional stations
+│   ├── stations.csv                    # 5 Chennai regional stations
 │   ├── charging_sessions.csv           # 7,987 historical charging sessions
 │   ├── ev_requests.csv                 # 20 incoming EV requests
 │   └── features.csv                    # 3,460 engineered ML feature rows
@@ -250,8 +250,14 @@ python simulation/benchmark.py
 
 ---
 
+## 📍 Demonstration Geography Disclaimer
+
+ChargeFlow AI uses a synthetic five-station Chennai network for demonstration purposes. The station locations and telemetry are simulated and are not intended to represent live infrastructure.
+
+---
+
 ## 🔬 Limitations & Future Scope
-- **Current Scope (MVP PoC):** Evaluated on a deterministic synthetic regional cluster of 5 stations and ~8,000 charging sessions with fixed seed for reproducible jury evaluation.
+- **Current Scope (MVP PoC):** Evaluated on a deterministic synthetic regional cluster of 5 stations in Chennai and ~8,000 charging sessions with fixed seed for reproducible jury evaluation.
 - **Future Scope (Production):**
   1. Real-time OCPP 2.0.1 / ISO 15118 protocol gateway for hardware bi-directional smart charging.
   2. Integration with Utility Smart Grid SCADA / OpenADR 2.0b signals for automated demand response.

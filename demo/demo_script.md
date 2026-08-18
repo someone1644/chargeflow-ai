@@ -39,7 +39,7 @@ Demonstrate how **ChargeFlow AI** prevents urban EV charging congestion and elec
 ### Step 1: Initial System Overview (Normal State)
 - **Action:** Open `http://localhost:5173/` on the main screen. Click **[Reset]** if needed.
 - **Narrative:** 
-  > *"Respected panel, EV charging networks suffer from severe spatial and temporal demand imbalance. Here is our 5-station regional cluster in the Hyderabad tech corridor in its balanced Normal State. Transformer loads are safe between 27% and 62%, wait times are minimal, and prices are balanced around base ₹16/kWh."*
+  > *"Respected panel, EV charging networks suffer from severe spatial and temporal demand imbalance. Here is our 5-station synthetic regional cluster in the Chennai metro area in its balanced Normal State. Transformer loads are safe between 27% and 62%, wait times are minimal, and prices are balanced around base ₹16/kWh."*
 - **Visuals to highlight:**
   - Map circle pins (all green/yellow).
   - KPI Cards: 5 Congested Stations = `0 / 5`, Avg Wait = `0 min`.
@@ -50,9 +50,9 @@ Demonstrate how **ChargeFlow AI** prevents urban EV charging congestion and elec
 ### Step 2: Injecting the Peak Demand Surge
 - **Action:** Click the red **[⚡ Simulate Peak Demand]** button on the top simulation toolbar.
 - **Narrative:**
-  > *"It is 5:30 PM rush hour. A burst of 12 EVs simultaneously approaches the popular HITEC City Hub (ST01). Under conventional Uncoordinated/Nearest-Station behavior, all drivers blindly head to the same station."*
+  > *"It is 5:30 PM rush hour. A burst of 12 EVs simultaneously approaches the popular Central Chennai station (ST01). Under conventional Uncoordinated/Nearest-Station behavior, all drivers blindly head to the same station."*
 - **Visuals to highlight:**
-  - Alert banner turns red: `⚠ HITEC City Hub (ST01): Load at 95% of grid limit — CONGESTION RISK`.
+  - Alert banner turns red: `⚠ Central Chennai (ST01): Load at 95% of grid limit — CONGESTION RISK`.
   - ST01 marker turns red and pulses.
   - Queue length at ST01 jumps to 8+ EVs; estimated wait shoots up to 84+ minutes.
   - Dynamic price at ST01 automatically escalates to ₹23.5/kWh (Congestion Surcharge).
@@ -74,7 +74,7 @@ Demonstrate how **ChargeFlow AI** prevents urban EV charging congestion and elec
 - **Narrative:**
   > *"We now trigger ChargeFlow AI's two-stage optimization engine. Stage 1 calculates an explainable multi-factor score across Distance, Availability, Queue, Grid Headroom, and Predicted Load. Stage 2 executes a PuLP MILP scheduler to dynamically throttle and allocate charging power."*
 - **Visuals to highlight:**
-  - The map immediately updates: EVs are intelligently routed to nearby underutilised hubs like Madhapur (ST04) and Jubilee Hills (ST05).
+  - The map immediately updates: EVs are intelligently routed to nearby underutilised stations like Adyar (ST04) and OMR / Perungudi (ST05).
   - ST01 queue is relieved, and total network load balances out.
 
 ---
@@ -82,11 +82,7 @@ Demonstrate how **ChargeFlow AI** prevents urban EV charging congestion and elec
 ### Step 5: Before vs After Delta & Metrics Comparison
 - **Action:** Scroll to the **Performance Comparison Table** at the bottom of the dashboard.
 - **Narrative:**
-  > *"Here are the real, calculated benchmark results comparing Naive FCFS vs. ChargeFlow AI:*
-  > - *Average Waiting Time:* Reduced from **97.5 min** to **0.0 min** (**-100%**)
-  > - *Peak Grid Utilisation:* Dropped from **235%** (overload) to **95.0%** (**-59.6%**)
-  > - *Grid Overload Events:* **0 incidents** vs **12 dangerous overloads** in baseline
-  > - *Station Load Imbalance:* Reduced from **207.3%** to **17.0%** (**-91.8%**)"*
+  > *"Here are the real, calculated benchmark results comparing Naive FCFS vs. ChargeFlow AI."*
 
 ---
 
@@ -101,9 +97,9 @@ Demonstrate how **ChargeFlow AI** prevents urban EV charging congestion and elec
 - **Action:** Click **Driver Portal** in the top navigation bar.
 - **Narrative:**
   > *"Let's see the EV driver's perspective. A commuter at 25% battery heading home requests a charge."*
-- **Action:** Click the quick preset **"Near HITEC City (Low SOC)"** and click **[Find Best Station]**.
+- **Action:** Click the quick preset **"Near Central Chennai (Low SOC)"** and click **[Find Best Station]**.
 - **Narrative:**
-  > *"Instead of sending the driver to the overcrowded HITEC City station with an 84-minute wait and ₹23.5/kWh price, ChargeFlow AI recommends Gachibowli Plaza (ST02) or Madhapur (ST04) with ₹14.2/kWh discounted pricing, 0-min wait, and a transparent score breakdown showing why it was chosen."*
+  > *"Instead of sending the driver to the overcrowded Central Chennai station with an 84-minute wait and ₹23.5/kWh price, ChargeFlow AI recommends Anna Nagar (ST02) or Adyar (ST04) with discounted pricing, 0-min wait, and a transparent score breakdown showing why it was chosen."*
 - **Visuals to highlight:**
   - Highlighted **RECOMMENDED** card.
   - Normalized Score Breakdown bars (Distance, Availability, Queue, Grid Headroom, Future Load).
@@ -119,6 +115,10 @@ Demonstrate how **ChargeFlow AI** prevents urban EV charging congestion and elec
 | Peak Demand | `POST /api/simulate/peak` | ST01 red alert, 95% load, 84 min wait |
 | Optimization | `POST /api/simulate/optimize` | Load redistributed, 0 overloads, comparison table |
 | Driver Route | `POST /api/allocate` | Transparent 5-factor scoring & incentive discount |
+
+---
+
+> **Note:** ChargeFlow AI uses a synthetic five-station Chennai network for demonstration purposes. The station locations and telemetry are simulated and are not intended to represent live infrastructure.
 
 ---
 *ChargeFlow AI — Faculty Evaluation Script Complete.*
