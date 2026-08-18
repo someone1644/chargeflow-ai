@@ -1,0 +1,7 @@
+{
+  "name": "peak",
+  "description": "Peak evening demand — burst of 12 EVs target ST01 (HITEC City Hub)",
+  "ev_burst_count": 12,
+  "target_station": "ST01",
+  "load_multiplier": 2.2
+}
