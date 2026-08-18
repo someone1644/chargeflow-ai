@@ -52,7 +52,7 @@ function ComparisonTable({ baseline, optimised }) {
           <thead>
             <tr className="border-b border-[#2a3050]">
               <th className="text-left px-5 py-3 text-gray-500 font-medium">Metric</th>
-              <th className="text-center px-5 py-3 text-red-400 font-medium">Baseline (Nearest)</th>
+              <th className="text-center px-5 py-3 text-red-400 font-medium">Uncoordinated Baseline</th>
               <th className="text-center px-5 py-3 text-green-400 font-medium">ChargeFlow AI</th>
               <th className="text-center px-5 py-3 text-gray-500 font-medium">Impact</th>
             </tr>

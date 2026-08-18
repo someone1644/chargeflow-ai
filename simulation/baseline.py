@@ -29,7 +29,7 @@ def run_baseline_benchmark(ev_burst_count: int = 12) -> dict:
 
 if __name__ == "__main__":
     print("=" * 60)
-    print("  ChargeFlow AI — Baseline (Nearest Station / FCFS) Benchmark")
+    print("  ChargeFlow AI — Uncoordinated Baseline Benchmark")
     print("=" * 60)
     metrics = run_baseline_benchmark()
     print(f"Strategy:                {metrics['strategy']}")

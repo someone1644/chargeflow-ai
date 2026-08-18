@@ -266,7 +266,10 @@ def metrics():
     total_chargers = sum(s["total_chargers"] for s in state.stations)
     active_chargers = total_chargers - sum(s["available_chargers"] for s in state.stations)
     total_queue = sum(s["queue_length"] for s in state.stations)
-    avg_wait = sum(max(0, s["queue_length"] - s["total_chargers"]) * 12 for s in state.stations) / max(len(state.stations), 1)
+
+    # Calculate live average wait time across all stations using exact station queue estimates
+    prices = calculate_all_prices(state.stations, state.predictions)
+    avg_wait = sum(p["estimated_wait_min"] for p in prices) / max(len(prices), 1)
 
     station_utils = [s["current_load_kw"] / s["grid_limit_kw"] for s in state.stations]
     avg_grid_load = sum(station_utils) / max(len(station_utils), 1) * 100

@@ -233,7 +233,7 @@ class SimulationState:
         load_imbalance = max(station_loads) - min(station_loads) if station_loads else 0
 
         return {
-            "strategy": "Nearest Station (Baseline)",
+            "strategy": "Uncoordinated Baseline",
             "avg_wait_min": round(total_wait / n, 1),
             "avg_queue_length": round(total_queue / n, 1),
             "peak_grid_utilisation": round(max(station_loads) * 100, 1),

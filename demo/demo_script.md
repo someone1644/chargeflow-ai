@@ -82,7 +82,11 @@ Demonstrate how **ChargeFlow AI** prevents urban EV charging congestion and elec
 ### Step 5: Before vs After Delta & Metrics Comparison
 - **Action:** Scroll to the **Performance Comparison Table** at the bottom of the dashboard.
 - **Narrative:**
-  > *"Here are the real, calculated benchmark results comparing Naive FCFS vs. ChargeFlow AI."*
+  > *"Here are the real, calculated benchmark results comparing the Uncoordinated Baseline (non-predictive allocation) vs. ChargeFlow AI:*
+  > - *Average Waiting Time:* Reduced from **97.5 min** to **0.0 min** (**-100%**)
+  > - *Peak Grid Utilisation:* Dropped from **235%** (overload) to **95.0%** (**-59.6%**)
+  > - *Grid Overload Events:* **0 incidents** vs **12 dangerous overloads** in baseline
+  > - *Station Load Imbalance:* Reduced from **207.3%** to **67.3%** (**-67.5%**)"*
 
 ---
 

@@ -96,17 +96,17 @@ $$\text{Price}_s = \text{BasePrice} + \Delta_{\text{congestion}} + \Delta_{\text
 
 ---
 
-## 📊 Measured Benchmark Results: Baseline (FCFS) vs. ChargeFlow AI
+## 📊 Measured Benchmark Results: Uncoordinated Baseline vs. ChargeFlow AI
 
 *Data generated deterministically via synthetic simulation scenario (12 EV burst targeting ST01):*
 
-| Metric | Baseline (Nearest Station / FCFS) | ChargeFlow AI Optimisation | Impact Delta |
+| Metric | Uncoordinated Baseline | ChargeFlow AI Optimisation | Impact Delta |
 |---|:---:|:---:|:---:|
 | **Average Waiting Time** | `97.5 min` | `0.0 min` | **-100.0%** ⚡ |
 | **Average Station Queue** | `14.5 EVs` | `5.4 EVs` | **-62.8%** 📉 |
 | **Peak Grid Utilisation** | `235.0%` *(Dangerous Overload)* | `95.0%` *(Safe Headroom)* | **-59.6%** 🛡️ |
 | **Grid Overload Incidents** | `12 violations` | `0 violations` | **-100% (12 prevented)** |
-| **Station Load Imbalance** | `207.3%` | `17.0%` | **-91.8%** ⚖️ |
+| **Station Load Imbalance** | `207.3%` | `67.3%` | **-67.5%** ⚖️ |
 
 ---
 
