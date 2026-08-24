@@ -143,7 +143,7 @@ $$\text{Score}(s, e) = w_d \cdot S_{\text{dist}} + w_a \cdot S_{\text{avail}} + 
   *A closer station receives a higher score, with the score clipped at zero beyond the 20 km threshold.*
 
 - **Availability Score ($S_{\text{avail}}$):**
-  $$S_{\text{avail}} = \frac{N_{\text{available}}}{\max(N_{\text{total}}, 1)}$$
+  $$S_{\text{avail}} = \frac{N_{\text{avail}}}{\max(N_{\text{total}}, 1)}$$
   *Stations with more available charging capacity receive a higher score.*
 
 - **Queue Score ($S_{\text{queue}}$):**
@@ -151,11 +151,11 @@ $$\text{Score}(s, e) = w_d \cdot S_{\text{dist}} + w_a \cdot S_{\text{avail}} + 
   *Stations with shorter queues receive a higher score.*
 
 - **Grid Headroom Score ($S_{\text{headroom}}$):**
-  $$S_{\text{headroom}} = \min\left(1, \max\left(0, \frac{P_{\text{grid\_limit}} - P_{\text{current\_load}}}{\max(P_{\text{grid\_limit}}, 1)}\right)\right)$$
+  $$S_{\text{headroom}} = \text{clip}\left(\frac{P_{\text{limit}} - P_{\text{load}}}{\max(P_{\text{limit}}, 1)}, 0, 1\right)$$
   *Stations with more unused transformer/grid capacity receive a higher score.*
 
 - **Future Load Score ($S_{\text{future}}$):**
-  $$S_{\text{future}} = 1 - U_{\text{predicted}}$$
+  $$S_{\text{future}} = 1 - U_{\text{pred}}$$
   *A station predicted to remain lightly utilised receives a higher score. If a prediction is unavailable, a neutral default of 0.5 is used.*
 
 #### Final Recommendation
@@ -182,16 +182,16 @@ where:
 #### Constraints
 
 1. **Grid Headroom Constraint:**
-   $$\sum_{i} P_i \le P_{\text{grid\_limit}} - P_{\text{current\_load}}$$
-   *Total charging power assigned to EVs must remain strictly within available grid headroom.*
+   $$\sum_{i} P_i \le P_{\text{limit}} - P_{\text{load}}$$
+   *Total charging power assigned to EVs must remain strictly within available grid headroom ($P_{\text{limit}} - P_{\text{load}}$).*
 
 2. **Charger Capacity Constraint:**
    $$\sum_{i} z_i \le N_{\text{chargers}}$$
-   *The number of simultaneously active EVs cannot exceed available charger slots.*
+   *The number of simultaneously active EVs cannot exceed available charger slots ($N_{\text{chargers}}$).*
 
 3. **EV Maximum Charging Rate:**
-   $$P_i \le P_{i, \max} \cdot z_i$$
-   *An EV cannot receive more power than its onboard maximum charging rate.*
+   $$P_i \le P_{i, \text{max}} \cdot z_i$$
+   *An EV cannot receive more power than its onboard maximum charging rate ($P_{i, \text{max}}$).*
 
 4. **Minimum Active Charging Power:**
    $$P_i \ge 10 \cdot z_i$$
