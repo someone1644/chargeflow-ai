@@ -1,4 +1,5 @@
 # ChargeFlow AI
+<<<<<<< HEAD
 
 **Predictive & Grid-Aware EV Charging Optimisation**
 
@@ -53,10 +54,29 @@ Public Electric Vehicle (EV) fast-charging infrastructure can experience signifi
    - Peak-demand and grid-constraint simulations
    - Driver station recommendation portal
    - Before-versus-after benchmark comparison
+=======
+---
+
+## Problem Statement
+Public Electric Vehicle (EV) fast-charging infrastructure faces acute spatial and temporal demand imbalance:
+- **Spatial Imbalance:** Drivers cluster at landmark stations (e.g., tech parks, highway exits), causing long waiting queues (60–90+ minutes), while stations just 2–4 km away sit underutilised (<30% load).
+- **Temporal & Grid Stress:** Uncoordinated peak arrivals cause transformer overloads exceeding local distribution substation limits ($kW_{actual} > kW_{transformer\_limit}$), risking blackout events and equipment degradation.
+- **Economic Inefficiency:** Flat pricing provides zero incentive for drivers to alter charging behaviors or alleviate grid congestion.
 
 ---
 
-## 🏗️ Architecture & System Design
+## Solution Overview
+**ChargeFlow AI** is an intelligent, grid-aware coordination platform that balances network demand through:
+1. **Demand & Congestion Forecasting:** LightGBM regression model predicting future station load across 15, 30, 60, and 120-minute horizons using cyclic time encodings and rolling lag features.
+2. **Explainable Multi-Factor Allocation:** Transparent, normalized 5-factor scoring engine guiding incoming EVs to optimal stations.
+3. **Grid-Constrained MILP Power Scheduling:** PuLP Mixed Integer Linear Programming ensuring total charging power never violates transformer limits.
+4. **Behavioral Dynamic Incentive Pricing:** Real-time pricing model applying transparent surcharges to congested stations and discounts to underutilised ones.
+5. **Interactive Operations Dashboard & Driver Portal:** High-performance React + Tailwind + Leaflet + Recharts application demonstrating live state transitions and before-vs-after delta metrics.
+>>>>>>> 7fc073041401046bd077b8543a3180e740bd126d
+
+---
+
+## Architecture & System Design
 
 ```text
 +-------------------------------------------------------------------------------+
@@ -118,7 +138,11 @@ Public Electric Vehicle (EV) fast-charging infrastructure can experience signifi
 
 ---
 
+<<<<<<< HEAD
 ## 📐 Core Decision Engines
+=======
+## Core Algorithms & Mathematical Formulations
+>>>>>>> 7fc073041401046bd077b8543a3180e740bd126d
 
 ### 1. Explainable Multi-Factor Station Allocation
 
@@ -163,7 +187,11 @@ The final station score is a weighted combination of these five factors. The Dri
 
 ---
 
+<<<<<<< HEAD
 ### 2. Grid-Aware Charging Scheduling — PuLP MILP
+=======
+## Measured Benchmark Results: Uncoordinated Baseline vs. ChargeFlow AI
+>>>>>>> 7fc073041401046bd077b8543a3180e740bd126d
 
 For each assigned EV $i$, the optimiser determines:
 - $P_i \ge 0$: Charging power in kW
@@ -274,7 +302,7 @@ Metrics ◄── Station State Update ◄── Per-EV Power ◄── PuLP MIL
 
 ---
 
-## 📁 Repository Structure
+## Repository Structure
 
 ```text
 chargeflow-ai/
@@ -348,7 +376,7 @@ chargeflow-ai/
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 | Layer | Technology |
 |---|---|
@@ -361,7 +389,7 @@ chargeflow-ai/
 
 ---
 
-## ⚡ Quick Start & Installation
+## Quick Start & Installation
 
 ### 1. Prerequisites
 - Python 3.10+ (Python 3.12 recommended)
@@ -407,6 +435,7 @@ npm run dev
 
 ---
 
+<<<<<<< HEAD
 ## 🔌 API Endpoints
 
 | Method & Endpoint | Description |
@@ -428,6 +457,10 @@ npm run dev
 
 The comparative benchmark can be executed directly from the terminal without the frontend:
 
+=======
+## Running Benchmarks & Verification
+To execute the automated benchmark script without running the frontend:
+>>>>>>> 7fc073041401046bd077b8543a3180e740bd126d
 ```bash
 python simulation/benchmark.py
 ```
@@ -436,7 +469,11 @@ This runs the deterministic peak-demand scenario through both the Uncoordinated 
 
 ---
 
+<<<<<<< HEAD
 ## 📍 Demonstration Geography
+=======
+## Demonstration Geography Disclaimer
+>>>>>>> 7fc073041401046bd077b8543a3180e740bd126d
 
 ChargeFlow AI uses a synthetic five-station network distributed across Chennai for demonstration purposes:
 
@@ -452,6 +489,7 @@ ChargeFlow AI uses a synthetic five-station network distributed across Chennai f
 
 ---
 
+<<<<<<< HEAD
 ## 🔬 Limitations & Future Scope
 
 ### Current PoC Scope & Limitations
@@ -486,3 +524,12 @@ A complete presentation guide is available in [`demo/demo_script.md`](file:///c:
 ## 📄 License
 
 This project is developed as an academic / hackathon proof of concept.
+=======
+## Limitations & Future Scope
+- **Current Scope (MVP PoC):** Evaluated on a deterministic synthetic regional cluster of 5 stations in Chennai and ~8,000 charging sessions with fixed seed for reproducible jury evaluation.
+- **Future Scope (Production):**
+  1. Real-time OCPP 2.0.1 / ISO 15118 protocol gateway for hardware bi-directional smart charging.
+  2. Integration with Utility Smart Grid SCADA / OpenADR 2.0b signals for automated demand response.
+  3. Dynamic traffic congestion and weather API ingestion for precise arrival time predictions.
+  4. Multi-Agent Reinforcement Learning (MARL) for competitive multi-CPO micro-market bidding.
+>>>>>>> 7fc073041401046bd077b8543a3180e740bd126d
