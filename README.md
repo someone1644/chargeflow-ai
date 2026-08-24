@@ -1,10 +1,7 @@
-# ⚡ ChargeFlow AI
-> **Predictive & Grid-Aware EV Charging Optimisation**  
-> *Hackathon MVP Proof-of-Concept for Faculty Evaluation (August 19, 2026)*
-
+# ChargeFlow AI
 ---
 
-## 📌 Problem Statement
+## Problem Statement
 Public Electric Vehicle (EV) fast-charging infrastructure faces acute spatial and temporal demand imbalance:
 - **Spatial Imbalance:** Drivers cluster at landmark stations (e.g., tech parks, highway exits), causing long waiting queues (60–90+ minutes), while stations just 2–4 km away sit underutilised (<30% load).
 - **Temporal & Grid Stress:** Uncoordinated peak arrivals cause transformer overloads exceeding local distribution substation limits ($kW_{actual} > kW_{transformer\_limit}$), risking blackout events and equipment degradation.
@@ -12,7 +9,7 @@ Public Electric Vehicle (EV) fast-charging infrastructure faces acute spatial an
 
 ---
 
-## 💡 Solution Overview
+## Solution Overview
 **ChargeFlow AI** is an intelligent, grid-aware coordination platform that balances network demand through:
 1. **Demand & Congestion Forecasting:** LightGBM regression model predicting future station load across 15, 30, 60, and 120-minute horizons using cyclic time encodings and rolling lag features.
 2. **Explainable Multi-Factor Allocation:** Transparent, normalized 5-factor scoring engine guiding incoming EVs to optimal stations.
@@ -22,7 +19,7 @@ Public Electric Vehicle (EV) fast-charging infrastructure faces acute spatial an
 
 ---
 
-## 🏗️ Architecture & System Design
+## Architecture & System Design
 
 ```
 +-------------------------------------------------------------------------------+
@@ -63,7 +60,7 @@ Public Electric Vehicle (EV) fast-charging infrastructure faces acute spatial an
 
 ---
 
-## 📐 Core Algorithms & Mathematical Formulations
+## Core Algorithms & Mathematical Formulations
 
 ### 1. Explainable Multi-Factor Station Allocation
 For any incoming EV request $e$ and candidate station $s$, each component is normalized to $[0.0, 1.0]$ where $1.0$ is optimal:
@@ -96,7 +93,7 @@ $$\text{Price}_s = \text{BasePrice} + \Delta_{\text{congestion}} + \Delta_{\text
 
 ---
 
-## 📊 Measured Benchmark Results: Uncoordinated Baseline vs. ChargeFlow AI
+## Measured Benchmark Results: Uncoordinated Baseline vs. ChargeFlow AI
 
 *Data generated deterministically via synthetic simulation scenario (12 EV burst targeting ST01):*
 
@@ -110,7 +107,7 @@ $$\text{Price}_s = \text{BasePrice} + \Delta_{\text{congestion}} + \Delta_{\text
 
 ---
 
-## 📁 Repository Structure
+## Repository Structure
 
 ```
 chargeflow-ai/
@@ -184,7 +181,7 @@ chargeflow-ai/
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 | Layer | Technology |
 |---|---|
@@ -196,7 +193,7 @@ chargeflow-ai/
 
 ---
 
-## ⚡ Quick Start & Installation
+## Quick Start & Installation
 
 ### 1. Prerequisites
 - Python 3.10+ (tested on Python 3.12)
@@ -242,7 +239,7 @@ npm run dev
 
 ---
 
-## 🧪 Running Benchmarks & Verification
+## Running Benchmarks & Verification
 To execute the automated benchmark script without running the frontend:
 ```bash
 python simulation/benchmark.py
@@ -250,13 +247,13 @@ python simulation/benchmark.py
 
 ---
 
-## 📍 Demonstration Geography Disclaimer
+## Demonstration Geography Disclaimer
 
 ChargeFlow AI uses a synthetic five-station Chennai network for demonstration purposes. The station locations and telemetry are simulated and are not intended to represent live infrastructure.
 
 ---
 
-## 🔬 Limitations & Future Scope
+## Limitations & Future Scope
 - **Current Scope (MVP PoC):** Evaluated on a deterministic synthetic regional cluster of 5 stations in Chennai and ~8,000 charging sessions with fixed seed for reproducible jury evaluation.
 - **Future Scope (Production):**
   1. Real-time OCPP 2.0.1 / ISO 15118 protocol gateway for hardware bi-directional smart charging.
